@@ -160,6 +160,163 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-小程序的异步处理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/17/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86/">小程序的异步处理</a>
+    </h1>
+  
+
+        
+        <a href="/2020/02/17/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86/" class="archive-article-date">
+  	<time datetime="2020-02-17T13:19:40.998Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="小程序中常用的异步处理总结"><a href="#小程序中常用的异步处理总结" class="headerlink" title="小程序中常用的异步处理总结"></a>小程序中常用的异步处理总结</h1><p>异步代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let res&#x3D; a()</span><br><span class="line">console.log(a)</span><br><span class="line">如果aundefined，将这种情况成为异步，而如果能够打印出预期代码，那么则为同步</span><br></pre></td></tr></table></figure>
+
+<p>异步函数：</p>
+<p>需要在调用函数时候设置success，fail，complete</p>
+<p>同步函数：</p>
+<p>1.js本身函数如tostrig</p>
+<p>2sync结尾函数，如wx.getstoragesync</p>
+<h2 id="小程序中的异步处理方式："><a href="#小程序中的异步处理方式：" class="headerlink" title="小程序中的异步处理方式："></a>小程序中的异步处理方式：</h2><h2 id="1回调函数使用："><a href="#1回调函数使用：" class="headerlink" title="1回调函数使用："></a>1回调函数使用：</h2><p>回调是我们最常见的异步处理方式，调用函数时候，需要传入一个回调函数，以函数执行完后调用</p>
+<p>回调函数会在执行完函数本身后调用</p>
+<p>小程序中的success，fail，compete都是回调函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">wx.authorize(&#123;</span><br><span class="line">scope:&quot;scope.userinfo&quot;,</span><br><span class="line">success:function(res)&#123;</span><br><span class="line">console.log(res)</span><br><span class="line">&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="2promise-链式调用"><a href="#2promise-链式调用" class="headerlink" title="2promise:链式调用"></a>2promise:链式调用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">db .collection(&#39;xxx&#39;).count</span><br><span class="line">.then(res&#x3D;&gt;&#123;</span><br><span class="line">console.log(res)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-await-async"><a href="#3-await-async" class="headerlink" title="3  await/async:"></a>3  await/async:</h2><h4 id="把一些异步函数拖住一直等，知道执行完成，使用后可以将代码看作异步的代码"><a href="#把一些异步函数拖住一直等，知道执行完成，使用后可以将代码看作异步的代码" class="headerlink" title="把一些异步函数拖住一直等，知道执行完成，使用后可以将代码看作异步的代码"></a>把一些异步函数拖住一直等，知道执行完成，使用后可以将代码看作异步的代码</h4><p><strong>注意：await必须在把函数async的声明下才可以调用！</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">async function getdata()&#123;</span><br><span class="line">let db&#x3D;wx.database()</span><br><span class="line">let result&#x3D;await.db.collection(&quot;tets&quot;).count();</span><br><span class="line">&#x2F;&#x2F;利用await可以等到count方法执行完成再赋值给res，这样res就不会拿到promise对象，让你去等。</span><br><span class="line">console.log(result)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/02/17/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-小程序中的箭头函数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/17/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%B8%AD%E7%9A%84%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0/">小程序中的箭头函数</a>
+    </h1>
+  
+
+        
+        <a href="/2020/02/17/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%B8%AD%E7%9A%84%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0/" class="archive-article-date">
+  	<time datetime="2020-02-17T13:19:40.998Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="小程序中的箭头函数"><a href="#小程序中的箭头函数" class="headerlink" title="小程序中的箭头函数"></a>小程序中的箭头函数</h2><h3 id="引入："><a href="#引入：" class="headerlink" title="引入："></a>引入：</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Page(&#123;</span><br><span class="line">A:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    wx.login(&#123;</span><br><span class="line">        success:<span class="function"><span class="keyword">function</span>(<span class="params">res</span>)</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="keyword">this</span>)		<span class="keyword">this</span>&lt;---wx.login</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;,</span><br><span class="line">    B:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">     wx.login(&#123;</span><br><span class="line">         success:<span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line">             <span class="built_in">console</span>.log(<span class="keyword">this</span>)			<span class="keyword">this</span>&lt;--page</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;)   </span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>a中的this，会因为在Afunction中引入了wx.login()而改变方向，指向了wx.login()对象，而不会指向原本的page。而b中的this由于使用了箭头函数的方式，所以不会因为函数的嵌套而改变方向。</p>
+<p>箭头函数的作用也就是：</p>
+<p>将this由</p>
+<h2 id="动态转化为静态"><a href="#动态转化为静态" class="headerlink" title="动态转化为静态"></a>动态转化为静态</h2><p><strong>从而减少了数据的修改</strong></p>
+<p>好的使用习惯：</p>
+<p>在page或者app中：</p>
+<p>外层套一个类似于onload的function方法,保证能够继承到对应的page对象，从而在this.setData({</p>
+<p>})中this不会变成undefined,而是对应page</p>
+<p>内部则使用箭头函数，保证this在传递过程保持静态，不会发生动态的继承。</p>
+<p>代码实例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">onLoad:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="keyword">var</span> that =<span class="keyword">this</span>;</span><br><span class="line">wx.login(&#123;</span><br><span class="line">complete:<span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line"><span class="built_in">console</span>.log(res)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">this</span>)</span><br><span class="line"><span class="built_in">console</span>.log(that)</span><br><span class="line">&#125;</span><br><span class="line">&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的that和this结果是一样的。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/02/17/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%B8%AD%E7%9A%84%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-递增三元组：" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     

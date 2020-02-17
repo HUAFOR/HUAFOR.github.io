@@ -6,13 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2020 | Hexo</title>
+  <title>小程序的异步处理 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/archives/2020/index.html">
+  <meta name="description" content="小程序中常用的异步处理总结异步代码： 123let res&#x3D; a()console.log(a)如果aundefined，将这种情况成为异步，而如果能够打印出预期代码，那么则为同步  异步函数： 需要在调用函数时候设置success，fail，complete 同步函数： 1.js本身函数如tostrig 2sync结尾函数，如wx.getstoragesync 小程序中的异步处理方式：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小程序的异步处理">
+<meta property="og:url" content="http://yoursite.com/2020/02/17/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="小程序中常用的异步处理总结异步代码： 123let res&#x3D; a()console.log(a)如果aundefined，将这种情况成为异步，而如果能够打印出预期代码，那么则为同步  异步函数： 需要在调用函数时候设置success，fail，complete 同步函数： 1.js本身函数如tostrig 2sync结尾函数，如wx.getstoragesync 小程序中的异步处理方式：">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-02-17T13:19:40.998Z">
+<meta property="article:modified_time" content="2020-02-16T04:01:03.998Z">
 <meta property="article:author" content="HUAFOR">
 <meta name="twitter:card" content="summary">
   
@@ -158,238 +162,191 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-小程序的异步处理" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      小程序的异步处理
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/17/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86/" class="archive-article-date">
+
+        
+        <a href="/2020/02/17/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86/" class="archive-article-date">
   	<time datetime="2020-02-17T13:19:40.998Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-17</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/17/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86/">小程序的异步处理</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="小程序中常用的异步处理总结"><a href="#小程序中常用的异步处理总结" class="headerlink" title="小程序中常用的异步处理总结"></a>小程序中常用的异步处理总结</h1><p>异步代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let res&#x3D; a()</span><br><span class="line">console.log(a)</span><br><span class="line">如果aundefined，将这种情况成为异步，而如果能够打印出预期代码，那么则为同步</span><br></pre></td></tr></table></figure>
 
-        <div class="article-info info-on-right">
-          
-          
+<p>异步函数：</p>
+<p>需要在调用函数时候设置success，fail，complete</p>
+<p>同步函数：</p>
+<p>1.js本身函数如tostrig</p>
+<p>2sync结尾函数，如wx.getstoragesync</p>
+<h2 id="小程序中的异步处理方式："><a href="#小程序中的异步处理方式：" class="headerlink" title="小程序中的异步处理方式："></a>小程序中的异步处理方式：</h2><h2 id="1回调函数使用："><a href="#1回调函数使用：" class="headerlink" title="1回调函数使用："></a>1回调函数使用：</h2><p>回调是我们最常见的异步处理方式，调用函数时候，需要传入一个回调函数，以函数执行完后调用</p>
+<p>回调函数会在执行完函数本身后调用</p>
+<p>小程序中的success，fail，compete都是回调函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">wx.authorize(&#123;</span><br><span class="line">scope:&quot;scope.userinfo&quot;,</span><br><span class="line">success:function(res)&#123;</span><br><span class="line">console.log(res)</span><br><span class="line">&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
+<h2 id="2promise-链式调用"><a href="#2promise-链式调用" class="headerlink" title="2promise:链式调用"></a>2promise:链式调用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">db .collection(&#39;xxx&#39;).count</span><br><span class="line">.then(res&#x3D;&gt;&#123;</span><br><span class="line">console.log(res)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-await-async"><a href="#3-await-async" class="headerlink" title="3  await/async:"></a>3  await/async:</h2><h4 id="把一些异步函数拖住一直等，知道执行完成，使用后可以将代码看作异步的代码"><a href="#把一些异步函数拖住一直等，知道执行完成，使用后可以将代码看作异步的代码" class="headerlink" title="把一些异步函数拖住一直等，知道执行完成，使用后可以将代码看作异步的代码"></a>把一些异步函数拖住一直等，知道执行完成，使用后可以将代码看作异步的代码</h4><p><strong>注意：await必须在把函数async的声明下才可以调用！</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">async function getdata()&#123;</span><br><span class="line">let db&#x3D;wx.database()</span><br><span class="line">let result&#x3D;await.db.collection(&quot;tets&quot;).count();</span><br><span class="line">&#x2F;&#x2F;利用await可以等到count方法执行完成再赋值给res，这样res就不会拿到promise对象，让你去等。</span><br><span class="line">console.log(result)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/wechat.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/02/17/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/17/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%B8%AD%E7%9A%84%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0/" class="archive-article-date">
-  	<time datetime="2020-02-17T13:19:40.998Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-17</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/02/17/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%B8%AD%E7%9A%84%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">小程序中的箭头函数</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/17/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%B8%AD%E7%9A%84%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0/">小程序中的箭头函数</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#小程序中常用的异步处理总结"><span class="toc-number">1.</span> <span class="toc-text">小程序中常用的异步处理总结</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#小程序中的异步处理方式："><span class="toc-number">1.1.</span> <span class="toc-text">小程序中的异步处理方式：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1回调函数使用："><span class="toc-number">1.2.</span> <span class="toc-text">1回调函数使用：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2promise-链式调用"><span class="toc-number">1.3.</span> <span class="toc-text">2promise:链式调用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-await-async"><span class="toc-number">1.4.</span> <span class="toc-text">3  await&#x2F;async:</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#把一些异步函数拖住一直等，知道执行完成，使用后可以将代码看作异步的代码"><span class="toc-number">1.4.0.1.</span> <span class="toc-text">把一些异步函数拖住一直等，知道执行完成，使用后可以将代码看作异步的代码</span></a></li></ol></li></ol></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/17/%E9%80%92%E5%A2%9E%E4%B8%89%E5%85%83%E7%BB%84%EF%BC%9A/" class="archive-article-date">
-  	<time datetime="2020-02-17T13:18:37.019Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-17</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/17/%E9%80%92%E5%A2%9E%E4%B8%89%E5%85%83%E7%BB%84%EF%BC%9A/">递增三元组：</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/15/%E9%9D%99%E6%80%81%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0/" class="archive-article-date">
-  	<time datetime="2020-02-15T01:19:00.314Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/15/%E9%9D%99%E6%80%81%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0/">静态成员函数</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/11/%E6%B5%85%E8%B0%88c++%E4%B8%AD%E7%9A%84%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2020-02-11T10:21:37.696Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/11/%E6%B5%85%E8%B0%88c++%E4%B8%AD%E7%9A%84%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D%E9%97%AE%E9%A2%98/">浅谈c++中的深浅拷贝问题</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/08/dp%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2020-02-08T15:26:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-08</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/08/dp%E9%97%AE%E9%A2%98/">dp问题哈哈</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/01/19/%E6%96%B0%E5%BC%80%E5%A7%8B/" class="archive-article-date">
-  	<time datetime="2020-01-19T01:16:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/01/19/%E6%96%B0%E5%BC%80%E5%A7%8B/">新开始</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/01/18/hello-world/" class="archive-article-date">
-  	<time datetime="2020-01-18T12:51:08.693Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/01/18/hello-world/">Hello World</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -412,8 +369,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
